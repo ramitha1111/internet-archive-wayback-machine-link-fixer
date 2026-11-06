@@ -19,6 +19,14 @@ jobs:
           php-version: '8.3'
           tools: composer
 
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache
+          key: ${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
